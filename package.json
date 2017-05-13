@@ -16,8 +16,8 @@
   "typings": "lib/index.d.ts",
   "scripts": {
     "start": "npm run build && nodemon --harmony ./examples/server.js",
-    "build-dist": "webpack --env.production",
-    "build": "tsc && npm run build-dist",
+    
+    "build": "tsc",
     "watch": "tsc -w",
     "prepublish": "npm run build",
     "test": "npm run build && mocha test/"
@@ -27,7 +27,7 @@
   },
   "dependencies": {
     "clock.js": "^1.1.0",
-    "delta-listener": "^1.1.0",
+    "delta-listener": "https://github.com/unintellisense/delta-listener/tarball/master",
     "fossil-delta": "^0.2.5",
     "msgpack-lite": "^0.1.20",
     "signals.js": "^1.0.0",
@@ -47,7 +47,6 @@
     "ts-loader": "^2.0.0",
     "typescript": "^2.1.4",
     "uglify-js": "^2.6.1",
-    "watchify": "^3.6.1",
-    "webpack": "^2.1.0-beta.25"
+    "watchify": "^3.6.1"
   }
 }

@@ -6,6 +6,10 @@ import { Room } from "./Room";
 
 import { Signal } from "signals.js";
 import { ExplicitStateObject } from 'delta-listener';
+
+/* TODO: Client should be passed in a map of roomNames:StateObject(s), with the intent 
+that the StateObject should be passed in to the room constructor when necessary */
+
 export class Client<T extends ExplicitStateObject<M>, M> extends WebSocketClient {
 
     id?: string;
@@ -53,7 +57,7 @@ export class Client<T extends ExplicitStateObject<M>, M> extends WebSocketClient
         }
     }
 
-    join<T>(roomName: string, options: any ): Room<T extends ExplicitStateObject<M>, M> {
+    join<T>(roomName: string, options: any): Room<T extends ExplicitStateObject<M>, M> {
         if(!this.rooms[roomName]) {
     this.rooms[roomName] = new Room<T>(this, roomName);
 }

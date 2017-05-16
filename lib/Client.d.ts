@@ -23,8 +23,8 @@ export declare class Client<T extends RoomStateMap> extends WebSocketClient {
     onCloseCallback(): void;
     onErrorCallback(): void;
     send(data: any): void;
-    join(roomName: keyof T, options: any): {
-        [id: string]: Room<ExplicitStateObject<any>>;
+    join(roomName: keyof T, options?: any): {
+        [id: string]: Room<any>;
     }[keyof T];
     /**
      * @override

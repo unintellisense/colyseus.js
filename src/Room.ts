@@ -8,11 +8,11 @@ import * as fossilDelta from "fossil-delta";
 import { Protocol } from "./Protocol";
 import { Client } from "./Client";
 
-export class Room<T extends ExplicitStateObject<M>, M> {
+export class Room<T extends ExplicitStateObject<any>> {
     public id: number;
     public name: string;
 
-    public state: ExplicitContainer<T, M>;
+    public state: ExplicitContainer<T, any>;
 
     public clock: Clock = new Clock();
     public remoteClock: Clock = new Clock();
@@ -27,10 +27,10 @@ export class Room<T extends ExplicitStateObject<M>, M> {
     public ping: number;
     private lastPatchTime: number;
 
-    private client: Client;
+    private client: Client<any>;
     private _previousState: any;
 
-    constructor(client: Client, name: string, data: T) {
+    constructor(client: Client<any>, name: string, data: T) {
         this.id = null;
         this.client = client;
         this.name = name;

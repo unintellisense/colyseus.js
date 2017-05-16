@@ -1,22 +1,31 @@
 import WebSocketClient from "websocket.js";
 import { Room } from "./Room";
 import { Signal } from "signals.js";
-export declare class Client extends WebSocketClient {
+import { ExplicitStateObject } from 'delta-listener';
+export declare type RoomStateMap = {
+    [roomName: string]: ExplicitStateObject<any>;
+};
+export declare class Client<T extends RoomStateMap> extends WebSocketClient {
+    initialRoomStateMap: RoomStateMap;
     id?: string;
     rooms: {
-        [id: string]: Room<any>;
+        [id: string]: Room<ExplicitStateObject<any>>;
     };
     onOpen: Signal;
     onMessage: Signal;
     onClose: Signal;
     onError: Signal;
     private _enqueuedCalls;
-    constructor(url: string, protocols?: string[], options?: any);
+    constructor(url: string, initialRoomStateMap: {
+        [roomName: string]: ExplicitStateObject<any>;
+    }, protocols?: string[], options?: any);
     onOpenCallback(event: any): void;
     onCloseCallback(): void;
     onErrorCallback(): void;
     send(data: any): void;
-    join<T>(roomName: string, options?: any): Room<T>;
+    join(roomName: keyof T, options: any): {
+        [id: string]: Room<ExplicitStateObject<any>>;
+    }[keyof T];
     /**
      * @override
      */

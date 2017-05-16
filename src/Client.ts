@@ -64,7 +64,7 @@ export class Client<T extends RoomStateMap> extends WebSocketClient {
         }
     }
 
-    join(roomName: keyof T, options: any) {
+    join(roomName: keyof T, options?: any) {
         if (!this.rooms[roomName]) {
             this.rooms[roomName] = new Room<any>(this, roomName, this.initialRoomStateMap[roomName]);
         }

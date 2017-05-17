@@ -1,18 +1,18 @@
 import { Signal } from "signals.js";
 import Clock = require("clock.js");
 
-import { ExplicitContainer, ExplicitStateObject } from "delta-listener";
+import { ExplicitContainer, StateObject } from "delta-listener";
 import * as msgpack from "msgpack-lite";
 import * as fossilDelta from "fossil-delta";
 
 import { Protocol } from "./Protocol";
 import { Client } from "./Client";
 
-export class Room<T extends ExplicitStateObject<any>> {
+export class Room<T extends StateObject> {
     public id: number;
     public name: string;
 
-    public state: ExplicitContainer<T, any>;
+    public state: ExplicitContainer<T>;
 
     public clock: Clock = new Clock();
     public remoteClock: Clock = new Clock();

@@ -5,13 +5,13 @@ import { Protocol } from "./Protocol";
 import { Room } from "./Room";
 
 import { Signal } from "signals.js";
-import { ExplicitStateObject } from 'delta-listener';
+import { StateObject } from 'delta-listener';
 
 /* TODO: Client should be passed in a map of roomNames:StateObject(s), with the intent 
 that the StateObject should be passed in to the room constructor when necessary */
 
 export type RoomStateMap = {
-    [roomName: string]: ExplicitStateObject<any>
+    [roomName: string]: StateObject
 }
 
 export class Client<T extends RoomStateMap> extends WebSocketClient {
@@ -19,7 +19,7 @@ export class Client<T extends RoomStateMap> extends WebSocketClient {
 
     public initialRoomStateMap: RoomStateMap
     id?: string;
-    rooms: { [id: string]: Room<ExplicitStateObject<any>> } = {};
+    rooms: { [id: string]: Room<StateObject> } = {};
 
     // signals
     onOpen: Signal = new Signal();
@@ -29,7 +29,7 @@ export class Client<T extends RoomStateMap> extends WebSocketClient {
 
     private _enqueuedCalls: any[] = [];
 
-    constructor(url: string, initialRoomStateMap: { [roomName: string]: ExplicitStateObject<any> }, protocols: string[] = null, options: any = {}) {
+    constructor(url: string, initialRoomStateMap: { [roomName: string]: StateObject }, protocols: string[] = null, options: any = {}) {
         super(url, protocols, options);
         this.binaryType = "arraybuffer";
         this.initialRoomStateMap = initialRoomStateMap;

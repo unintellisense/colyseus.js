@@ -1,11 +1,11 @@
 import { Signal } from "signals.js";
 import Clock = require("clock.js");
-import { ExplicitContainer, ExplicitStateObject } from "delta-listener";
+import { ExplicitContainer, StateObject } from "delta-listener";
 import { Client } from "./Client";
-export declare class Room<T extends ExplicitStateObject<any>> {
+export declare class Room<T extends StateObject> {
     id: number;
     name: string;
-    state: ExplicitContainer<T, any>;
+    state: ExplicitContainer<T>;
     clock: Clock;
     remoteClock: Clock;
     onJoin: Signal;
